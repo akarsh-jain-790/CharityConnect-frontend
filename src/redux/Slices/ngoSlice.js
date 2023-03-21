@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const baseUrl = `http://192.168.137.114:8080`;
+const baseUrl = `https://charity-connect.up.railway.app/`;
 
 /**
  * @asyncThunk Ngo fetch function.
