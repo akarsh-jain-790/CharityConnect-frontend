@@ -26,7 +26,7 @@ export const authenticateUser = createAsyncThunk(
         return json;
     }
     else{
-        throw new Error(json.message);
+        throw new Error(json.error);
     }
   }
 );
@@ -41,7 +41,7 @@ export const authenticateUser = createAsyncThunk(
 export const registerUser = createAsyncThunk(
     "users/register",
     async (user) => {
-        const response = await fetch(`${baseUrl}/accounts/register`, {
+        const response = await fetch(`${baseUrl}/user/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export const registerUser = createAsyncThunk(
           return json;
       }
       else{
-          throw new Error(json.message);
+          throw new Error(json.error);
       }
     }
   );
@@ -70,6 +70,28 @@ export const logoutUser = createAsyncThunk(
         localStorage.removeItem('Authentication-token');
         // TODO: Redirect to home page insted and show alert message in case of success and error both.
         return "logged out"
+    }
+  );
+
+  export const registerOrg = createAsyncThunk(
+    "org/register",
+    async (user) => {
+      console.log(user);
+        const response = await fetch(`${baseUrl}/org/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+  
+      const json = await response.json();
+      if(response.ok){
+          return json;
+      }
+      else{
+          throw new Error(json.error);
+      }
     }
   );
 
@@ -118,6 +140,21 @@ export const logoutUser = createAsyncThunk(
         [registerUser.rejected]: (state, action) => {
             state.pending = false;
             state.error = true;
+            state.error_message = action.error.message;
+        },
+         //? States for Org registration.
+         [registerOrg.pending]: (state) => {
+          state.pending = true;
+        },
+        [registerOrg.fulfilled]: (state, action) => {
+            state.pending = false;
+            state.error = false;
+            state.success_message = action.payload.message;
+        },
+        [registerOrg.rejected]: (state, action) => {
+            state.pending = false;
+            state.error = true;
+            console.log(action);
             state.error_message = action.error.message;
         },
         //? States for logout.

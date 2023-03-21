@@ -43,32 +43,29 @@ export default function Navbar() {
                                                     </li>
                                                     <li>
                                                         <Link to='/'>
-                                                            <a href="program.html">latest causes</a>
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to='/'>
-                                                            <a href="events.html">social events </a>
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to='/'>
-                                                            <a href="blog.html">Blog</a>
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to='/'>
                                                             <a href="contact.html">Contact</a>
                                                         </Link>
                                                     </li>
                                                 </ul>
                                             </nav>
                                         </div>
-                                        <div class="header-right-btn d-none d-lg-block ml-20">
-                                            <Link to='/sign-in'>
-                                            <a class="btn header-btn">Login</a>
-                                            </Link>
-                                        </div>
+
+                                        {!localStorage.getItem("Authentication-token") &&
+                                            <div class="header-right-btn d-none d-lg-block ml-20">
+                                                <Link to='/sign-up-ngo'>
+                                                    <a class="btn header-btn">Register NGO</a>
+                                                </Link>
+                                            </div>
+                                        }
+                                        {!localStorage.getItem("Authentication-token")?
+                                            <div class="header-right-btn d-none d-lg-block ml-20">
+                                                <Link to='/sign-in'>
+                                                    <a class="btn header-btn">Login</a>
+                                                </Link>
+                                            </div>:
+                                            <div class="header-right-btn d-none d-lg-block ml-20">
+                                                    <a class="btn header-btn" onClick={handleLogout}>Logout</a>
+                                            </div>}
                                     </div>
                                 </div> 
                                 <div class="col-12">

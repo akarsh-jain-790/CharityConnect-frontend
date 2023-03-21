@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from './Slices/authenticationSlice';
-import booksReducer from './Slices/bookSlice';
+import ngosReducer from './Slices/ngoSlice';
 import {
     persistStore,
     persistReducer,
@@ -21,12 +21,11 @@ const persistConfig = {
   }
 
 const authenticationPersistedReducer = persistReducer(persistConfig, authenticationReducer);
-// const booksPersistedReducer = persistReducer(persistConfig, booksReducer);
 
 export const store = configureStore({
     reducer: {
         authentication: authenticationPersistedReducer,
-        book: booksReducer
+        ngos: ngosReducer
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

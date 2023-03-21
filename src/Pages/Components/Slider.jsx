@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Slider() {
 	return (
 		<div class="slider-area">
@@ -10,7 +12,9 @@ export default function Slider() {
 									<h1 data-animation="fadeInUp" data-delay=".6s">Giving made simple, impact made greater.</h1>
 									<p data-animation="fadeInUp" data-delay=".8s" >Giving made simple, impact made greater</p>
 									<div class="hero__btn">
-										<a href="industries.html" class="btn hero-btn mb-10"  data-animation="fadeInLeft" data-delay=".8s">Donate</a>
+										<Link to='/donate'>
+											<a href="industries.html" class="btn hero-btn mb-10"  data-animation="fadeInLeft" data-delay=".8s">Donate</a>
+										</Link>
 									</div>
 								</div>
 							</div>
